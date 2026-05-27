@@ -1,0 +1,18 @@
+# Development reference images (not used by the site)
+resource/
+
+# Claude IDE files
+.claude/
+
+# Node
+node_modules/
+npm-debug.log*
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Env files
+.env
+.env.local
