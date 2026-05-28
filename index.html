@@ -47,8 +47,8 @@ nav.scrolled{background:rgba(247,246,241,.92);backdrop-filter:blur(20px);-webkit
 .nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none}
 .logo-mark{flex-shrink:0;transition:transform .25s}
 .nav-logo:hover .logo-mark{transform:scale(1.06)}
-.logo-wordmark{font-family:var(--fd);font-weight:900;font-size:1.05rem;letter-spacing:.04em;line-height:1}
-.logo-super{color:var(--dark)}
+.logo-wordmark{font-family:var(--fd);font-weight:900;font-size:1.05rem;letter-spacing:.04em;line-height:1;color:var(--o)}
+.logo-super{color:var(--o)}
 .logo-ecruiter{color:var(--o)}
 .nav-links{display:flex;align-items:center;gap:32px;list-style:none}
 .nav-links a{text-decoration:none;color:var(--text2);font-size:.9rem;font-weight:500;transition:color var(--t)}
@@ -167,25 +167,16 @@ section{padding:100px 5%}
 .bc-center-title{font-family:var(--fd);font-size:1.4rem;font-weight:800;color:#fff;text-align:center;margin-bottom:6px}
 .bc-center-sub{font-size:.82rem;color:rgba(255,255,255,.5);text-align:center;margin-bottom:32px}
 
-/* Mini ovals inside dark card */
-.mini-ovals-wrap{width:100%;position:relative;flex:1;min-height:220px}
-.mini-ovals-row{display:flex;align-items:center;justify-content:space-between;padding:0 10px}
-.mini-oval{width:64px;height:90px;border-radius:32px;overflow:hidden;position:relative;flex-shrink:0}
-.mini-oval-inner{width:100%;height:100%;display:flex;align-items:center;justify-content:center}
-.mini-oval-initials{font-family:var(--fd);font-size:.95rem;font-weight:700;color:rgba(255,255,255,.85)}
-.m1 .mini-oval-inner{background:linear-gradient(145deg,#8B5CF6,#6D28D9)}
-.m2 .mini-oval-inner{background:linear-gradient(145deg,#EC4899,#BE185D)}
-.m3 .mini-oval-inner{background:linear-gradient(145deg,#FF6B00,#CC4400)}
-.m4 .mini-oval-inner{background:linear-gradient(145deg,#10B981,#065F46)}
-.m5 .mini-oval-inner{background:linear-gradient(145deg,#3B82F6,#1D4ED8)}
-.mini-wave{position:absolute;top:50%;left:0;width:100%;transform:translateY(-50%)}
-
-/* Offset each mini oval for visual rhythm */
-.mini-oval:nth-child(1){margin-top:20px}
-.mini-oval:nth-child(2){margin-top:-20px}
-.mini-oval:nth-child(3){margin-top:10px}
-.mini-oval:nth-child(4){margin-top:-25px}
-.mini-oval:nth-child(5){margin-top:15px}
+/* Country grid inside dark card */
+.country-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;width:100%;flex:1;margin:4px 0}
+.ccard{background:rgba(255,255,255,.07);border-radius:14px;padding:14px 12px;display:flex;align-items:center;gap:11px;border:1px solid rgba(255,255,255,.06);transition:background .22s,transform .22s;cursor:default}
+.ccard:hover{background:rgba(255,255,255,.13);transform:translateY(-2px)}
+.cflag{font-size:1.6rem;line-height:1;flex-shrink:0}
+.cinfo{flex:1;min-width:0}
+.cname{font-size:.78rem;font-weight:700;color:rgba(255,255,255,.9);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ccount{font-size:.62rem;color:rgba(255,255,255,.4);margin-top:2px}
+.cbar{height:3px;background:rgba(255,255,255,.1);border-radius:2px;margin-top:7px;overflow:hidden}
+.cbar-fill{height:100%;border-radius:2px;background:linear-gradient(90deg,var(--o),#ff9900);transition:width 1.2s cubic-bezier(.4,0,.2,1)}
 
 .center-stats-row{display:flex;gap:24px;margin-top:28px;width:100%}
 .center-stat{flex:1;text-align:center;background:rgba(255,255,255,.06);border-radius:12px;padding:14px 8px}
@@ -276,32 +267,51 @@ section{padding:100px 5%}
 .srv-h{font-family:var(--fd);font-size:1.05rem;font-weight:700;margin-bottom:8px;color:var(--dark)}
 .srv-p{font-size:.85rem;color:var(--text2);line-height:1.65}
 
-/* ══ TESTIMONIALS ══ */
-#testimonials{background:var(--bg2)}
-.test-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:56px;max-width:1200px;margin:56px auto 0}
-.tcard{background:var(--bg);border-radius:20px;padding:28px;border:1.5px solid transparent;transition:all .3s}
-.tcard:hover{border-color:rgba(255,107,0,.2);box-shadow:var(--sh2)}
-.tcard-stars{display:flex;gap:4px;margin-bottom:16px}
-.star{color:var(--o);font-size:.9rem}
-.tcard-q{font-size:.9rem;color:var(--text);line-height:1.7;margin-bottom:20px;font-style:italic}
-.tcard-author{display:flex;align-items:center;gap:12px}
-.tcard-av{width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--fd);font-size:.8rem;font-weight:700;color:#fff;flex-shrink:0}
-.tcard-name{font-size:.85rem;font-weight:700;color:var(--dark)}
-.tcard-role{font-size:.75rem;color:var(--text3)}
+/* ══ TESTIMONIALS CAROUSEL ══ */
+#testimonials{background:var(--bg2);padding:100px 5%}
+.t-carousel-outer{max-width:860px;margin:0 auto}
+.t-carousel-wrap{position:relative;overflow:hidden;border-radius:28px;background:var(--bg);border:1.5px solid rgba(0,0,0,.06)}
+.t-slide{display:none;padding:52px 56px;position:relative;overflow:hidden;animation:tfade .5s ease both}
+.t-slide.active{display:block}
+@keyframes tfade{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+.t-bigquote{position:absolute;top:24px;left:44px;font-size:9rem;line-height:.9;font-family:Georgia,serif;color:var(--o);opacity:.08;pointer-events:none;font-style:normal;user-select:none}
+.t-stars{display:flex;gap:3px;margin-bottom:24px}
+.t-star{color:var(--o);font-size:1.15rem}
+.t-text{font-size:1.15rem;line-height:1.8;color:var(--dark);font-weight:500;margin-bottom:36px;position:relative;z-index:1;max-width:680px}
+.t-divider{height:1px;background:rgba(0,0,0,.07);margin-bottom:28px}
+.t-author{display:flex;align-items:center;gap:16px}
+.t-av{width:52px;height:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--fd);font-size:.95rem;font-weight:800;color:#fff;flex-shrink:0}
+.t-name{font-family:var(--fd);font-size:.97rem;font-weight:700;color:var(--dark)}
+.t-role{font-size:.8rem;color:var(--text3);margin-top:2px}
+.t-badge{display:inline-flex;align-items:center;gap:6px;background:var(--og);color:var(--o);font-size:.68rem;font-weight:700;padding:3px 10px;border-radius:50px;margin-top:6px;letter-spacing:.04em}
+.t-controls{display:flex;align-items:center;justify-content:space-between;margin-top:24px;padding:0 4px}
+.t-dots{display:flex;gap:8px;align-items:center}
+.t-dot{width:8px;height:8px;border-radius:50%;background:rgba(0,0,0,.15);border:none;cursor:pointer;padding:0;transition:all .3s}
+.t-dot.active{background:var(--o);width:28px;border-radius:4px}
+.t-arrows{display:flex;gap:10px}
+.t-arrow{width:44px;height:44px;border-radius:14px;background:var(--bg);border:1.5px solid rgba(0,0,0,.1);cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--text2);transition:all .25s;font-size:1rem}
+.t-arrow:hover{background:var(--o);border-color:var(--o);color:#fff;transform:scale(1.06)}
+@media(max-width:600px){.t-slide{padding:32px 24px}.t-bigquote{font-size:6rem}}
 
 /* ══ FAQ ══ */
-#faq{background:var(--bg);max-width:800px;margin:0 auto;padding:100px 5%}
-#faq .section-h2{text-align:center;margin-bottom:48px}
-.faq-item{border-bottom:1px solid rgba(0,0,0,.08);overflow:hidden}
-.faq-q{width:100%;background:none;border:none;text-align:left;padding:22px 0;font-family:var(--f);font-size:.95rem;font-weight:600;color:var(--dark);cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:16px;transition:color .2s}
+#faq{background:var(--bg);padding:100px 5%}
+.faq-wrap{max-width:760px;margin:0 auto}
+.faq-h-wrap{text-align:center;margin-bottom:52px}
+.faq-item{background:var(--bg2);border-radius:18px;overflow:hidden;margin-bottom:12px;transition:box-shadow .25s,transform .25s}
+.faq-item:hover{transform:translateY(-1px)}
+.faq-item.open{box-shadow:0 8px 32px rgba(0,0,0,.08);transform:none}
+.faq-q{width:100%;background:none;border:none;text-align:left;padding:22px 24px;font-family:var(--f);font-size:.95rem;font-weight:600;color:var(--dark);cursor:pointer;display:flex;align-items:center;gap:16px;transition:color .2s}
 .faq-q:hover{color:var(--o)}
-.faq-icon{width:24px;height:24px;border-radius:50%;background:var(--bg3);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:background .25s,transform .25s}
+.faq-item.open .faq-q{color:var(--o)}
+.faq-num{font-family:var(--fd);font-size:.7rem;font-weight:800;color:var(--o);opacity:.45;min-width:30px;transition:opacity .25s;letter-spacing:.04em}
+.faq-item.open .faq-num{opacity:1}
+.faq-icon{width:28px;height:28px;border-radius:8px;background:var(--bg3);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-left:auto;transition:background .25s,transform .3s}
 .faq-item.open .faq-icon{background:var(--o);transform:rotate(45deg)}
-.faq-icon svg{color:var(--dark);transition:color .25s}
-.faq-item.open .faq-icon svg{color:#fff}
-.faq-a{max-height:0;overflow:hidden;transition:max-height .4s var(--ease),padding .3s}
-.faq-a-inner{padding:0 0 20px;font-size:.88rem;color:var(--text2);line-height:1.75}
-.faq-item.open .faq-a{max-height:200px}
+.faq-icon svg{transition:color .25s}
+.faq-item.open .faq-icon svg{color:#fff!important}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .42s var(--ease)}
+.faq-a-inner{padding:0 24px 22px 70px;font-size:.88rem;color:var(--text2);line-height:1.85}
+.faq-item.open .faq-a{max-height:240px}
 
 /* ══ CTA SECTION ══ */
 #cta{background:var(--dark);padding:100px 5%;text-align:center;position:relative;overflow:hidden}
@@ -405,14 +415,10 @@ footer{background:var(--dark);color:rgba(255,255,255,.5);padding:64px 5% 32px}
 <!-- ══ NAV ══ -->
 <nav id="nav" role="banner">
   <a href="/" class="nav-logo" aria-label="SUPERECRUITER početna">
-    <svg class="logo-mark" width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-      <rect width="36" height="36" rx="9" fill="#FF6B00"/>
-      <!-- S-link: two nodes connected by a curve = talent to company -->
-      <circle cx="10" cy="13" r="3.5" fill="white"/>
-      <circle cx="26" cy="23" r="3.5" fill="white"/>
-      <path d="M 10,13 C 10,20 26,16 26,23" stroke="white" stroke-width="2.5" stroke-linecap="round" fill="none"/>
-      <circle cx="10" cy="13" r="1.5" fill="#FF6B00"/>
-      <circle cx="26" cy="23" r="1.5" fill="#FF6B00"/>
+    <svg class="logo-mark" width="36" height="36" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <rect width="38" height="38" rx="10" fill="#FF6B00"/>
+      <path d="M 28,11 H 13 C 10,11 10,19 13,19 H 25 C 28,19 28,27 25,27 H 10"
+        stroke="white" stroke-width="3.8" stroke-linecap="round" stroke-linejoin="round"/>
     </svg>
     <span class="logo-wordmark"><span class="logo-super">SUPER</span><span class="logo-ecruiter">ECRUITER</span></span>
   </a>
@@ -634,38 +640,53 @@ footer{background:var(--dark);color:rgba(255,255,255,.5);padding:64px 5% 32px}
       <div class="bc-center-title">Radnici iz srca Azije</div>
       <div class="bc-center-sub">Nepal, Bangladeš, Indija, Filipini — provereni i spremni</div>
 
-      <div class="mini-ovals-wrap" style="position:relative;flex:1;min-height:200px;width:100%">
-        <!-- Wave SVG -->
-        <svg viewBox="0 0 400 120" xmlns="http://www.w3.org/2000/svg"
-          style="position:absolute;top:50%;left:0;width:100%;transform:translateY(-50%);pointer-events:none" aria-hidden="true">
-          <defs>
-            <linearGradient id="mwg" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stop-color="#8B5CF6"/>
-              <stop offset="25%" stop-color="#EC4899"/>
-              <stop offset="50%" stop-color="#FF6B00"/>
-              <stop offset="75%" stop-color="#10B981"/>
-              <stop offset="100%" stop-color="#3B82F6"/>
-            </linearGradient>
-          </defs>
-          <path d="M 30,70 C 60,30 100,100 160,55 C 220,10 260,90 200,65 C 240,40 300,95 340,58 C 370,30 390,75 400,60"
-            fill="none" stroke="url(#mwg)" stroke-width="2.5" stroke-linecap="round" opacity="0.6"/>
-        </svg>
-
-        <div class="mini-ovals-row" style="position:relative;z-index:1;padding-top:20px">
-          <div class="mini-oval m1" style="margin-top:20px">
-            <div class="mini-oval-inner"><span class="mini-oval-initials">RB</span></div>
+      <div class="country-grid" id="country-grid">
+        <div class="ccard">
+          <span class="cflag">🇳🇵</span>
+          <div class="cinfo">
+            <div class="cname">Nepal</div>
+            <div class="ccount">1.200+ radnika</div>
+            <div class="cbar"><div class="cbar-fill" style="width:0%" data-w="90%"></div></div>
           </div>
-          <div class="mini-oval m2" style="margin-top:-15px">
-            <div class="mini-oval-inner"><span class="mini-oval-initials">AH</span></div>
+        </div>
+        <div class="ccard">
+          <span class="cflag">🇧🇩</span>
+          <div class="cinfo">
+            <div class="cname">Bangladeš</div>
+            <div class="ccount">850+ radnika</div>
+            <div class="cbar"><div class="cbar-fill" style="width:0%" data-w="70%"></div></div>
           </div>
-          <div class="mini-oval m3" style="margin-top:10px">
-            <div class="mini-oval-inner"><span class="mini-oval-initials">PS</span></div>
+        </div>
+        <div class="ccard">
+          <span class="cflag">🇮🇳</span>
+          <div class="cinfo">
+            <div class="cname">Indija</div>
+            <div class="ccount">600+ radnika</div>
+            <div class="cbar"><div class="cbar-fill" style="width:0%" data-w="52%"></div></div>
           </div>
-          <div class="mini-oval m4" style="margin-top:-20px">
-            <div class="mini-oval-inner"><span class="mini-oval-initials">SK</span></div>
+        </div>
+        <div class="ccard">
+          <span class="cflag">🇵🇭</span>
+          <div class="cinfo">
+            <div class="cname">Filipini</div>
+            <div class="ccount">380+ radnika</div>
+            <div class="cbar"><div class="cbar-fill" style="width:0%" data-w="36%"></div></div>
           </div>
-          <div class="mini-oval m5" style="margin-top:15px">
-            <div class="mini-oval-inner"><span class="mini-oval-initials">FA</span></div>
+        </div>
+        <div class="ccard">
+          <span class="cflag">🇵🇰</span>
+          <div class="cinfo">
+            <div class="cname">Pakistan</div>
+            <div class="ccount">210+ radnika</div>
+            <div class="cbar"><div class="cbar-fill" style="width:0%" data-w="22%"></div></div>
+          </div>
+        </div>
+        <div class="ccard">
+          <span class="cflag">🇱🇰</span>
+          <div class="cinfo">
+            <div class="cname">Šri Lanka</div>
+            <div class="ccount">120+ radnika</div>
+            <div class="cbar"><div class="cbar-fill" style="width:0%" data-w="14%"></div></div>
           </div>
         </div>
       </div>
@@ -945,112 +966,155 @@ footer{background:var(--dark);color:rgba(255,255,255,.5);padding:64px 5% 32px}
 
 <!-- ══ TESTIMONIALS ══ -->
 <section id="testimonials" aria-label="Utisci klijenata">
-  <div style="max-width:1200px;margin:0 auto">
-    <div style="text-align:center" data-aos="fade-up">
-      <div class="section-tag" style="justify-content:center">
-        <span style="width:20px;height:2px;background:var(--o);border-radius:2px;display:inline-block"></span>
-        Reference
-      </div>
-      <h2 class="section-h2">Šta kažu naši klijenti</h2>
+  <div style="text-align:center;margin-bottom:52px" data-aos="fade-up">
+    <div class="section-tag" style="justify-content:center">
+      <span style="width:20px;height:2px;background:var(--o);border-radius:2px;display:inline-block"></span>
+      Reference
     </div>
-    <div class="test-grid" data-aos="fade-up" data-aos-delay="100">
-      <article class="tcard">
-        <div class="tcard-stars" aria-label="5 od 5 zvezda">
-          <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
+    <h2 class="section-h2">Šta kažu naši klijenti</h2>
+    <p class="section-sub" style="margin:0 auto">Kompanije iz Srbije koje su prošle kroz naš proces — u njihovim rečima.</p>
+  </div>
+
+  <div class="t-carousel-outer" data-aos="fade-up" data-aos-delay="100">
+    <div class="t-carousel-wrap" id="t-wrap">
+
+      <!-- SLIDE 1 -->
+      <div class="t-slide active" role="group" aria-label="Utisak 1 od 3">
+        <div class="t-bigquote" aria-hidden="true">"</div>
+        <div class="t-stars" aria-label="5 od 5 zvezda">
+          <span class="t-star">★</span><span class="t-star">★</span><span class="t-star">★</span><span class="t-star">★</span><span class="t-star">★</span>
         </div>
-        <p class="tcard-q">"Za manje od tri nedelje imali smo 6 iskusnih kuvara iz Nepala. SUPERECRUITER je sve sredil — od selekcije u Katmanduu do dozvola u Beogradu."</p>
-        <div class="tcard-author">
-          <div class="tcard-av" style="background:linear-gradient(135deg,#FF6B00,#FF9900)">MH</div>
+        <p class="t-text">"Za manje od tri nedelje imali smo 6 iskusnih kuvara iz Nepala. SUPERECRUITER je sredio sve — od selekcije u Katmanduu do radnih dozvola u Beogradu. Nismo morali ni prstom da mrdnemo."</p>
+        <div class="t-divider"></div>
+        <div class="t-author">
+          <div class="t-av" style="background:linear-gradient(135deg,#FF6B00,#FF9900)">MH</div>
           <div>
-            <div class="tcard-name">Marija Horvat</div>
-            <div class="tcard-role">Vlasnica, Restoran Adriatic · Beograd</div>
+            <div class="t-name">Marija Horvat</div>
+            <div class="t-role">Vlasnica · Restoran Adriatic, Beograd</div>
+            <div class="t-badge">🇳🇵 6 kuvara iz Nepala · Ugostiteljstvo</div>
           </div>
         </div>
-      </article>
-      <article class="tcard">
-        <div class="tcard-stars" aria-label="5 od 5 zvezda">
-          <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
+      </div>
+
+      <!-- SLIDE 2 -->
+      <div class="t-slide" role="group" aria-label="Utisak 2 od 3">
+        <div class="t-bigquote" aria-hidden="true">"</div>
+        <div class="t-stars" aria-label="5 od 5 zvezda">
+          <span class="t-star">★</span><span class="t-star">★</span><span class="t-star">★</span><span class="t-star">★</span><span class="t-star">★</span>
         </div>
-        <p class="tcard-q">"Trebalo nam je 12 vozača C kategorije iz Bangladeša. Papiri, dozvole, prihvat na aerodromu — sve su oni sredili. Mi smo samo čekali."</p>
-        <div class="tcard-author">
-          <div class="tcard-av" style="background:linear-gradient(135deg,#3B82F6,#1D4ED8)">DM</div>
+        <p class="t-text">"Trebalo nam je 12 vozača C kategorije iz Bangladeša. Papiri, vize, prihvat na aerodromu — sve su sredili. Mi smo samo čekali i dočekali ljude koji su odmah krenuli na posao."</p>
+        <div class="t-divider"></div>
+        <div class="t-author">
+          <div class="t-av" style="background:linear-gradient(135deg,#3B82F6,#1D4ED8)">DM</div>
           <div>
-            <div class="tcard-name">Dragan Milić</div>
-            <div class="tcard-role">Direktor, Logistika Pro d.o.o.</div>
+            <div class="t-name">Dragan Milić</div>
+            <div class="t-role">Direktor · Logistika Pro d.o.o.</div>
+            <div class="t-badge">🇧🇩 12 vozača iz Bangladeša · Logistika</div>
           </div>
         </div>
-      </article>
-      <article class="tcard">
-        <div class="tcard-stars" aria-label="5 od 5 zvezda">
-          <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
+      </div>
+
+      <!-- SLIDE 3 -->
+      <div class="t-slide" role="group" aria-label="Utisak 3 od 3">
+        <div class="t-bigquote" aria-hidden="true">"</div>
+        <div class="t-stars" aria-label="5 od 5 zvezda">
+          <span class="t-star">★</span><span class="t-star">★</span><span class="t-star">★</span><span class="t-star">★</span><span class="t-star">★</span>
         </div>
-        <p class="tcard-q">"20 zidara iz Indije za naš projekat u Novom Sadu. Svi su stigli na vreme, svi imaju valjane papire. Cena i kvalitet su nenadmašni."</p>
-        <div class="tcard-author">
-          <div class="tcard-av" style="background:linear-gradient(135deg,#10B981,#065F46)">ZP</div>
+        <p class="t-text">"20 zidara iz Indije za naš projekat u Novom Sadu. Svi su stigli na vreme, svi imaju valjane papire, svi rade odlično. Cena i kvalitet su nenadmašni. Sledećem projektu — opet SUPERECRUITER."</p>
+        <div class="t-divider"></div>
+        <div class="t-author">
+          <div class="t-av" style="background:linear-gradient(135deg,#10B981,#065F46)">ZP</div>
           <div>
-            <div class="tcard-name">Zoran Pavlović</div>
-            <div class="tcard-role">Direktor, GradCo Izgradnja d.o.o.</div>
+            <div class="t-name">Zoran Pavlović</div>
+            <div class="t-role">Direktor · GradCo Izgradnja d.o.o.</div>
+            <div class="t-badge">🇮🇳 20 zidara iz Indije · Građevinarstvo</div>
           </div>
         </div>
-      </article>
+      </div>
+
+    </div>
+
+    <!-- Controls -->
+    <div class="t-controls">
+      <div class="t-dots" role="tablist" aria-label="Navigacija između utisaka">
+        <button class="t-dot active" data-idx="0" aria-label="Utisak 1" aria-selected="true"></button>
+        <button class="t-dot" data-idx="1" aria-label="Utisak 2" aria-selected="false"></button>
+        <button class="t-dot" data-idx="2" aria-label="Utisak 3" aria-selected="false"></button>
+      </div>
+      <div class="t-arrows">
+        <button class="t-arrow" id="t-prev" aria-label="Prethodni utisak">&#8592;</button>
+        <button class="t-arrow" id="t-next" aria-label="Sledeći utisak">&#8594;</button>
+      </div>
     </div>
   </div>
 </section>
 
 <!-- ══ FAQ ══ -->
 <section id="faq" aria-label="Česta pitanja">
-  <div class="section-tag" style="justify-content:center;margin-bottom:12px">FAQ</div>
-  <h2 class="section-h2" style="text-align:center">Česta pitanja</h2>
+  <div class="faq-wrap">
+    <div class="faq-h-wrap" data-aos="fade-up">
+      <div class="section-tag" style="justify-content:center">FAQ</div>
+      <h2 class="section-h2">Česta pitanja</h2>
+      <p class="section-sub" style="margin:0 auto">Sve što treba da znate pre nego što nas pozovete.</p>
+    </div>
 
   <div class="faq-item" data-aos="fade-up">
     <button class="faq-q" aria-expanded="false">
+      <span class="faq-num">01</span>
       Koliko dugo traje dovođenje stranog radnika u Srbiju?
       <div class="faq-icon" aria-hidden="true">
         <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
       </div>
     </button>
-    <div class="faq-a"><div class="faq-a-inner">Prosečno 3–6 nedelja od vašeg zahteva do dolaska radnika u Srbiju. To uključuje selekciju na terenu u Aziji (1–2 nedelje), pribavljanje vize i radne dozvole (2–3 nedelje) i organizaciju dolaska.</div></div>
+    <div class="faq-a"><div class="faq-a-inner">Prosečno 3–6 nedelja od vašeg zahteva do dolaska radnika. Selekcija na terenu u Aziji traje 1–2 nedelje, viza i radna dozvola još 2–3 nedelje, a zatim organizujemo dolazak. Za hitne slučajeve možemo biti brži.</div></div>
   </div>
 
   <div class="faq-item" data-aos="fade-up" data-aos-delay="40">
     <button class="faq-q" aria-expanded="false">
+      <span class="faq-num">02</span>
       Koje radne dozvole možete da sredite?
       <div class="faq-icon" aria-hidden="true">
         <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
       </div>
     </button>
-    <div class="faq-a"><div class="faq-a-inner">Radimo sa svim tipovima dozvola prema Zakonu o strancima RS: dozvola za privremeni boravak i rad, sezonski rad i intra-kompanijski transfer. Posao se odvija uz puno poštovanje srpskog zakonodavstva.</div></div>
+    <div class="faq-a"><div class="faq-a-inner">Radimo sa svim tipovima dozvola prema Zakonu o strancima RS: dozvola za privremeni boravak i rad, sezonski rad i intra-kompanijski transfer. Sve u skladu sa srpskim zakonodavstvom.</div></div>
   </div>
 
   <div class="faq-item" data-aos="fade-up" data-aos-delay="80">
     <button class="faq-q" aria-expanded="false">
-      Iz kojih zemalja dolaze kandidati?
+      <span class="faq-num">03</span>
+      Iz kojih zemalja dolaze radnici?
       <div class="faq-icon" aria-hidden="true">
         <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
       </div>
     </button>
-    <div class="faq-a"><div class="faq-a-inner">Najveći deo naše baze čine radnici iz Nepala i Bangladeša — dve zemlje sa dugom tradicijom odlaska na rad u inostranstvo. Radimo i sa kandidatima iz Indije, Filipina i Pakistana, zavisno od struke koja vam treba.</div></div>
+    <div class="faq-a"><div class="faq-a-inner">Najveći deo baze čine radnici iz Nepala i Bangladeša — dve zemlje sa dugom tradicijom rada u inostranstvu. Radimo i sa kandiatima iz Indije, Filipina, Pakistana i Šri Lanke, zavisno od struke.</div></div>
   </div>
 
   <div class="faq-item" data-aos="fade-up" data-aos-delay="120">
     <button class="faq-q" aria-expanded="false">
+      <span class="faq-num">04</span>
       Kako funkcioniše naplata usluga?
       <div class="faq-icon" aria-hidden="true">
         <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
       </div>
     </button>
-    <div class="faq-a"><div class="faq-a-inner">Radimo po modelu uspešnosti — naknadu plaćate tek kada kandidat počne da radi. Bez skrivenih troškova. Ponuda je uvek transparentna i pisana.</div></div>
+    <div class="faq-a"><div class="faq-a-inner">Naknadu plaćate tek kada radnik počne da radi. Bez skrivenih troškova. Ponuda je uvek transparentna i u pisanoj formi pre nego što počnemo.</div></div>
   </div>
 
   <div class="faq-item" data-aos="fade-up" data-aos-delay="160">
     <button class="faq-q" aria-expanded="false">
-      Šta se dešava ako kandidat ne odgovara?
+      <span class="faq-num">05</span>
+      Šta ako radnik ne odgovara ili ode?
       <div class="faq-icon" aria-hidden="true">
         <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
       </div>
     </button>
-    <div class="faq-a"><div class="faq-a-inner">Nudimo garantni period od 90 dana. Ako kandidat napusti poziciju ili ne odgovara, pronalazimo zamenu bez dodatnih troškova.</div></div>
+    <div class="faq-a"><div class="faq-a-inner">Nudimo garantni period od 90 dana. Ako radnik napusti posao ili ne odgovara vašim potrebama, pronalazimo zamenu bez dodatnih troškova za vas.</div></div>
   </div>
+
+  </div>
+
 </section>
 
 <!-- ══ CTA ══ -->
@@ -1163,13 +1227,10 @@ footer{background:var(--dark);color:rgba(255,255,255,.5);padding:64px 5% 32px}
   <div class="footer-grid">
     <div>
       <div class="footer-brand" style="display:flex;align-items:center;gap:10px">
-        <svg width="32" height="32" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <rect width="36" height="36" rx="9" fill="#FF6B00"/>
-          <circle cx="10" cy="13" r="3.5" fill="white"/>
-          <circle cx="26" cy="23" r="3.5" fill="white"/>
-          <path d="M 10,13 C 10,20 26,16 26,23" stroke="white" stroke-width="2.5" stroke-linecap="round" fill="none"/>
-          <circle cx="10" cy="13" r="1.5" fill="#FF6B00"/>
-          <circle cx="26" cy="23" r="1.5" fill="#FF6B00"/>
+        <svg width="32" height="32" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <rect width="38" height="38" rx="10" fill="#FF6B00"/>
+          <path d="M 28,11 H 13 C 10,11 10,19 13,19 H 25 C 28,19 28,27 25,27 H 10"
+            stroke="white" stroke-width="3.8" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
         <span>SUPER<span style="color:var(--o)">ECRUITER</span></span>
       </div>
@@ -1346,6 +1407,50 @@ document.querySelectorAll('.oval-ph').forEach(oval => {
     oval.style.transform = '';
   });
 });
+
+// ── Testimonial carousel ──
+(function(){
+  const slides = document.querySelectorAll('.t-slide');
+  const dots   = document.querySelectorAll('.t-dot');
+  if (!slides.length) return;
+  let cur = 0, timer;
+  function go(n) {
+    slides[cur].classList.remove('active');
+    dots[cur].classList.remove('active');
+    dots[cur].setAttribute('aria-selected','false');
+    cur = ((n % slides.length) + slides.length) % slides.length;
+    slides[cur].classList.add('active');
+    dots[cur].classList.add('active');
+    dots[cur].setAttribute('aria-selected','true');
+    clearInterval(timer);
+    timer = setInterval(() => go(cur + 1), 5500);
+  }
+  const prev = document.getElementById('t-prev');
+  const next = document.getElementById('t-next');
+  if (prev) prev.addEventListener('click', () => go(cur - 1));
+  if (next) next.addEventListener('click', () => go(cur + 1));
+  dots.forEach(d => d.addEventListener('click', () => go(+d.dataset.idx)));
+  timer = setInterval(() => go(cur + 1), 5500);
+  // Pause on hover
+  const wrap = document.querySelector('.t-carousel-wrap');
+  if (wrap) {
+    wrap.addEventListener('mouseenter', () => clearInterval(timer));
+    wrap.addEventListener('mouseleave', () => { timer = setInterval(() => go(cur + 1), 5500); });
+  }
+})();
+
+// ── Country bar animation ──
+const barObs = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (!entry.isIntersecting) return;
+    entry.target.querySelectorAll('.cbar-fill').forEach(bar => {
+      bar.style.width = bar.dataset.w || '0%';
+    });
+    barObs.unobserve(entry.target);
+  });
+}, { threshold: 0.25 });
+const cg = document.getElementById('country-grid');
+if (cg) barObs.observe(cg);
 </script>
 </body>
 </html>
