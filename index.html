@@ -378,23 +378,23 @@ footer{background:var(--dark);color:rgba(255,255,255,.5);padding:64px 5% 32px}
 
 /* ══ MOBILE MENU — full screen overlay ══ */
 .mobile-menu{
-  position:fixed;top:72px;left:0;right:0;bottom:0;
+  position:fixed;top:0;left:0;right:0;bottom:0;
   background:var(--dark2);
   z-index:998;display:flex;flex-direction:column;
-  padding:32px 8% 40px;
+  padding:0 8% 40px;
   opacity:0;pointer-events:none;
   transform:translateX(100%);
   transition:transform .42s cubic-bezier(.4,0,.2,1),opacity .42s;
   overflow-y:auto;overflow-x:hidden;
 }
 .mobile-menu::before{
-  content:'';position:absolute;top:-80px;right:-80px;
-  width:340px;height:340px;border-radius:50%;
-  background:radial-gradient(circle,rgba(255,107,0,.18) 0%,transparent 70%);
+  content:'';position:absolute;top:0;right:-60px;
+  width:320px;height:320px;border-radius:50%;
+  background:radial-gradient(circle,rgba(255,107,0,.15) 0%,transparent 70%);
   pointer-events:none;
 }
 .mobile-menu.open{opacity:1;pointer-events:all;transform:translateX(0)}
-.mob-links{display:flex;flex-direction:column;flex:1}
+.mob-links{display:flex;flex-direction:column;flex:1;padding-top:84px}
 .mob-link{
   display:flex;align-items:center;gap:16px;
   text-decoration:none;color:rgba(255,255,255,.55);
@@ -433,8 +433,13 @@ footer{background:var(--dark);color:rgba(255,255,255,.5);padding:64px 5% 32px}
   /* Nav */
   .nav-links,.nav-cta{display:none}
   .nav-ham{display:flex}
-  .nav-mob-cta{display:flex}
-  nav{background:rgba(247,246,241,.96);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid rgba(0,0,0,.07);box-shadow:0 2px 12px rgba(0,0,0,.05)}
+  nav{background:rgba(247,246,241,.96);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid rgba(0,0,0,.07);box-shadow:0 2px 12px rgba(0,0,0,.05);transition:background .35s var(--ease),border-color .35s var(--ease),box-shadow .35s var(--ease)}
+  /* Nav darkens when overlay menu is open */
+  nav.menu-open{background:var(--dark2)!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important;border-bottom-color:rgba(255,255,255,.06)!important;box-shadow:none!important}
+  nav.menu-open .logo-wordmark,nav.menu-open .logo-super,nav.menu-open .logo-ecruiter{color:#fff;transition:color .35s}
+  nav.menu-open .nav-ham span{background:var(--o)}
+  /* Hero: hide secondary button on mobile */
+  .hero-actions .btn-secondary{display:none}
 
   /* Section spacing */
   section{padding:60px 5%}
@@ -564,10 +569,6 @@ footer{background:var(--dark);color:rgba(255,255,255,.5);padding:64px 5% 32px}
     <li><a href="#contact">Kontakt</a></li>
   </ul>
   <a href="#contact" class="nav-cta">Počnite danas</a>
-  <a href="tel:+381611806141" class="nav-mob-cta" aria-label="Pozovite nas">
-    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.62 3.45a2 2 0 0 1 1.99-2.18h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6.08 6.08l1.77-1.77a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7a2 2 0 0 1 1.72 2.02z"/></svg>
-    Pozovite
-  </a>
   <div class="nav-ham" id="ham" aria-label="Otvori meni" aria-expanded="false" role="button" tabindex="0">
     <span></span><span></span><span></span>
   </div>
@@ -1461,12 +1462,14 @@ const mob = document.getElementById('mob-menu');
 function closeMobileMenu() {
   mob.classList.remove('open');
   ham.classList.remove('open');
+  nav.classList.remove('menu-open');
   ham.setAttribute('aria-expanded', 'false');
   document.body.style.overflow = '';
 }
 ham.addEventListener('click', () => {
   const open = mob.classList.toggle('open');
   ham.classList.toggle('open', open);
+  nav.classList.toggle('menu-open', open);
   ham.setAttribute('aria-expanded', String(open));
   document.body.style.overflow = open ? 'hidden' : '';
 });
