@@ -34,8 +34,8 @@
   --ease:cubic-bezier(.4,0,.2,1);--t:.3s;
   --sh:0 4px 24px rgba(0,0,0,.06);--sh2:0 12px 48px rgba(0,0,0,.1)
 }
-html{scroll-behavior:smooth}
-body{font-family:var(--f);background:var(--bg);color:var(--text);line-height:1.6;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+html{scroll-behavior:smooth;overflow-x:hidden}
+body{font-family:var(--f);background:var(--bg);color:var(--text);line-height:1.6;overflow-x:hidden;max-width:100%;-webkit-font-smoothing:antialiased}
 ::-webkit-scrollbar{width:4px}
 ::-webkit-scrollbar-track{background:var(--bg3)}
 ::-webkit-scrollbar-thumb{background:var(--o);border-radius:4px}
@@ -103,7 +103,7 @@ nav.scrolled{background:rgba(247,246,241,.92);backdrop-filter:blur(20px);-webkit
 .oval-item:nth-child(3){transform:translateY(0)}
 .oval-item:nth-child(4){transform:translateY(-14px)}
 .oval-item:nth-child(5){transform:translateY(18px)}
-.oval-name{font-size:.72rem;font-weight:600;color:var(--text2);margin-top:12px;white-space:nowrap}
+.oval-name{font-size:.72rem;font-weight:600;color:var(--text2);margin-top:12px;white-space:nowrap;max-width:90px;overflow:hidden;text-overflow:ellipsis}
 .oval-role{font-size:.62rem;color:var(--text3);font-weight:400}
 
 /* SVG wave connecting ovals */
@@ -111,8 +111,8 @@ nav.scrolled{background:rgba(247,246,241,.92);backdrop-filter:blur(20px);-webkit
 .hero-ovals-row>*{z-index:1}
 
 /* ══ STATS STRIP ══ */
-.stats-strip{background:var(--dark);color:#fff;padding:32px 5%;display:flex;align-items:center;justify-content:center;gap:0;overflow-x:auto}
-.stat-item{flex:1;min-width:160px;text-align:center;padding:8px 24px;position:relative}
+.stats-strip{background:var(--dark);color:#fff;padding:32px 5%;display:flex;align-items:center;justify-content:center;gap:0;overflow-x:hidden}
+.stat-item{flex:1;min-width:0;text-align:center;padding:8px 24px;position:relative}
 .stat-item:not(:last-child)::after{content:'';position:absolute;right:0;top:50%;transform:translateY(-50%);height:40px;width:1px;background:rgba(255,255,255,.12)}
 .stat-num{font-family:var(--fd);font-size:2.2rem;font-weight:800;color:var(--o);line-height:1}
 .stat-lbl{font-size:.8rem;color:rgba(255,255,255,.55);margin-top:4px;font-weight:400}
@@ -383,30 +383,120 @@ footer{background:var(--dark);color:rgba(255,255,255,.5);padding:64px 5% 32px}
   .bc-center{grid-column:1/3;grid-row:1;min-height:auto}
   .bc-tl,.bc-tr,.bc-bl,.bc-br{grid-column:auto;grid-row:auto}
   .services-grid{grid-template-columns:repeat(2,1fr)}
-  .test-grid{grid-template-columns:repeat(2,1fr)}
   .how-inner{grid-template-columns:1fr;gap:40px}
   .footer-grid{grid-template-columns:1fr 1fr;gap:32px}
 }
+
 @media(max-width:768px){
+  /* Nav */
   .nav-links,.nav-cta{display:none}
   .nav-ham{display:flex}
+
+  /* Section spacing */
+  section{padding:60px 5%}
+  #hero{padding:90px 5% 40px}
+  #bento{padding:60px 5%}
+  #testimonials{padding:60px 5%}
+  #faq{padding:60px 5%}
+  #contact{padding:60px 5%}
+  #cta{padding:60px 5%}
+  #services{padding:60px 5%}
+  #how{padding:60px 5%}
+  .bento-header{margin-bottom:36px}
+  .services-grid{margin-top:36px}
+
+  /* Bento */
   .bento-grid{grid-template-columns:1fr}
   .bc-center{grid-column:1}
+
+  /* Hero ovals — scale down */
+  .hero-ovals-row{gap:2px;padding-bottom:10px}
+  .oval-ph{width:64px;height:90px;border-radius:32px}
+  .oval-ph-initials{font-size:1.1rem}
+  .oval-item:nth-child(1){transform:translateY(12px)}
+  .oval-item:nth-child(2){transform:translateY(-6px)}
+  .oval-item:nth-child(3){transform:translateY(0)}
+  .oval-item:nth-child(4){transform:translateY(-8px)}
+  .oval-item:nth-child(5){transform:translateY(10px)}
+  .oval-name{font-size:.6rem;margin-top:8px}
+  .oval-role{font-size:.52rem}
+
+  /* Stats strip — 2 columns */
+  .stats-strip{flex-wrap:wrap;padding:24px 5%}
+  .stat-item{flex:0 0 50%;min-width:0;padding:16px 12px}
+  .stat-item::after{display:none!important}
+  .stat-num{font-size:1.8rem}
+
+  /* Testimonials */
+  .t-slide{padding:32px 24px}
+  .t-text{font-size:1rem}
+  .t-bigquote{font-size:5rem;top:12px;left:18px}
+
+  /* Services */
   .services-grid{grid-template-columns:1fr}
-  .test-grid{grid-template-columns:1fr}
-  .contact-inner{grid-template-columns:1fr}
-  .footer-grid{grid-template-columns:1fr;gap:24px}
-  .stats-strip{flex-wrap:wrap}
-  .stat-item:not(:last-child)::after{display:none}
+
+  /* How it works */
+  .how-inner{grid-template-columns:1fr;gap:40px}
+  .how-visual{min-height:280px}
+
+  /* Contact */
+  .contact-inner{grid-template-columns:1fr;gap:40px}
   .form-row{grid-template-columns:1fr}
-  .hero-ovals-row{gap:4px}
-  .oval-ph{width:72px;height:102px;border-radius:36px}
+
+  /* FAQ */
+  .faq-q{padding:18px 16px;gap:12px}
+  .faq-a-inner{padding:0 16px 18px 58px}
+
+  /* Footer */
+  .footer-grid{grid-template-columns:1fr;gap:28px}
 }
+
 @media(max-width:480px){
-  .hero-h1{font-size:2.2rem}
-  .oval-ph{width:54px;height:76px;border-radius:28px}
-  .oval-ph-initials{font-size:1rem}
+  /* Hero text */
+  .hero-h1{font-size:2.1rem}
+  .hero-sub{font-size:.93rem}
+  .hero-actions{gap:12px}
+  .btn-primary{padding:14px 28px;font-size:.95rem}
+  .btn-secondary{padding:14px 24px;font-size:.95rem}
+
+  /* Hero ovals — show only 3, hide outer two */
+  .oval-item:nth-child(1),.oval-item:nth-child(5){display:none}
+  .oval-ph{width:80px;height:112px;border-radius:40px}
+  .oval-ph-initials{font-size:1.3rem}
+  .oval-name{font-size:.66rem}
+  .oval-item:nth-child(2){transform:translateY(-10px)}
+  .oval-item:nth-child(3){transform:translateY(0)}
+  .oval-item:nth-child(4){transform:translateY(-10px)}
+
+  /* Stats — single column */
+  .stat-item{flex:0 0 50%}
+  .stat-num{font-size:1.7rem}
+
+  /* Bento card padding */
+  .bc{padding:22px 18px}
+  .bc-center{padding:28px 20px}
+
+  /* Testimonials */
+  .t-slide{padding:28px 18px}
+  .t-bigquote{display:none}
+  .t-text{font-size:.97rem}
+  .t-av{width:44px;height:44px;font-size:.82rem}
+  .t-controls{flex-direction:column;gap:16px;align-items:flex-start}
+
+  /* CTA buttons full-width */
+  .cta-actions{flex-direction:column;align-items:stretch}
+  .btn-white,.btn-outline-white{justify-content:center;width:100%}
+
+  /* Contact form */
+  .contact-form{padding:24px 18px}
+
+  /* FAQ */
+  .faq-q{font-size:.9rem}
+
+  /* Footer */
   .footer-bottom{flex-direction:column;gap:16px;text-align:center}
+  .footer-bottom-links{flex-wrap:wrap;justify-content:center;gap:12px}
+  footer{padding:48px 5% 28px}
 }
 </style>
 </head>
